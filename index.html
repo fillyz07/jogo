@@ -8,32 +8,39 @@
       color: black;
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 100px;
+      margin-top: 200px;
     }
 
-    a#jogo {
-      color: black; /* invisível sobre o fundo preto */
+    a {
+      color: black;
       text-decoration: none;
     }
 
-    a#jogo:hover {
-      color: gray; /* aparece só quando passa o mouse */
-    }
-    a#jogo2 {
-      color: black; /* invisível sobre o fundo preto */
-      text-decoration: none;
+    a:hover {
+      color: gray;
     }
 
-    a#jogo2:hover {
-      color: gray; /* aparece só quando passa o mouse */
+    /* Falso link que não faz nada */
+    #jogo {
+      cursor: pointer;
+    }
+
+    /* Link verdadeiro escondido no final da página */
+    #jogo2 {
+      margin-top: 10000px; /* Força o usuário a rolar */
+      display: block;
     }
   </style>
 </head>
 <body>
-  <h1> a </h1>
-  <p>você é esperto em..</p>
+  <h1>a</h1>
+  <p>Você é esperto em...</p>
   <p>oi</p>
-  <a id="jogo2" href="https://youtube.com">clique</a><br>
-  <a id="jogo" href="https://instagram.com">clique em mim</a>
+
+  <!-- Falso link -->
+  <a id="jogo" onclick="alert('errou rs')">clique em mim</a><br>
+
+  <!-- Link real escondido -->
+  <a id="jogo2" href="https://youtube.com">achou neném</a>
 </body>
 </html>
