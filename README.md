@@ -1,14 +1,12 @@
-# GitHub Pages
+# Enigma
 
-<img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
+<img src="https://i.pinimg.com/736x/4b/a8/4a/4ba84ad6897d14d33b1e41413bc5312e.jpg" align="right" height="200px" />
 
 Eaii!
 
 Estou aqui por meio desse link, fazer um jogo bem legal!
 
 Não se esqueça, caso você não consiga não tem problema, podes fazer no seu tempo ☕️
-
-[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/fillyz07/jogo/issues/1)
 
 ---
 
