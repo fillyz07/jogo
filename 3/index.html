@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>enigma</title>
+</head>
+<body style="background-color: black; color: white; text-align: center; margin-top: 100px;">
+  <h2>digite a senha:</h2>
+  <input type="password" id="senha" placeholder="Senha">
+  <button color: white; onclick="verificarSenha()">entrar</button>
+
+  <script>
+    function verificarSenha() {
+      var senha = document.getElementById("senha").value;
+      if (senha === "minhasenha123") {
+        window.location.href = "pagina.html";
+      } else {
+        alert("Senha incorreta!");
+      }
+    }
+  </script>
+</body>
+</html>
