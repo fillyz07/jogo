@@ -6,15 +6,13 @@
 <body style="background-color: black; color: white; text-align: center; margin-top: 100px;">
   <h2>digite a senha:</h2>
   <input type="password" id="senha" placeholder="Senha">
-  <button color: green; onclick="verificarSenha()">entrar</button>
- <h4>ela está em algumas das páginas na qual vc entrou</h4>
+  <button style="color: green;" onclick="verificarSenha()">entrar</button>
+  <h4>ela está em algumas das páginas na qual vc entrou</h4>
 
   <script>
     function verificarSenha() {
       var senha = document.getElementById("senha").value;
-      if (senha === "perdão")
-      if (senha === "perdao") 
-      {
+      if (senha === "perdão" || senha === "perdao") {
         window.location.href = "essespensamentosestaomeatormentando";
       } else {
         alert("incorreta");
