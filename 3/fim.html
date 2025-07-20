@@ -4,7 +4,52 @@
   <meta charset="UTF-8" />
   <title>Nervous | The Neighbourhood</title>
   <style>
-    body {
+    /* Tela inicial */
+    #startScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      flex-direction: column;
+    }
+
+    #startPlayBtn {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(0, 31, 63, 0.9);
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    #startPlayBtn:hover {
+      background-color: rgba(0, 31, 63, 1);
+    }
+
+    /* Triângulo play do botão inicial */
+    #startPlayBtn::before {
+      content: "";
+      display: block;
+      margin-left: 5px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 25px 0 25px 40px;
+      border-color: transparent transparent transparent white;
+    }
+
+    /* Tudo que fica oculto até apertar o play */
+    #mainContent {
+      display: none;
+      height: 100vh;
       margin: 0;
       padding: 0;
       background-color: black;
@@ -16,7 +61,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
     }
 
     .slideshow-container {
@@ -71,10 +115,6 @@
       margin: 0 auto 40px;
     }
 
-    audio {
-      display: none;
-    }
-
     /* Botão triangular de play/pause fixo no topo centralizado */
     #playPauseBtn {
       position: fixed;
@@ -125,62 +165,85 @@
     #playPauseBtn.pause::after {
       left: 27px;
     }
+
   </style>
 </head>
 <body>
 
-  <!-- Botão play/pause -->
-  <button id="playPauseBtn" class="pause" aria-label="Pausar música"></button>
-
-  <!-- Música de fundo -->
-  <audio id="audioPlayer" autoplay loop>
-    <source src="nervous.mp3" type="audio/mpeg" />
-    Seu navegador não suporta o áudio.
-  </audio>
-
-  <!-- Slideshow -->
-  <div class="slideshow-container">
-    <img class="slide active" src="imagem1.png" alt="Imagem 1" />
-    <img class="slide" src="imagem2.png" alt="Imagem 2" />
-    <img class="slide" src="imagem3.png" alt="Imagem 3" />
-    <img class="slide" src="imagem4.png" alt="Imagem 4" />
-    <img class="slide" src="imagem5.png" alt="Imagem 5" />
-    <img class="slide" src="imagem6.png" alt="Imagem 6" />
-    <img class="slide" src="imagem7.png" alt="Imagem 7" />
-    <img class="slide" src="imagem8.png" alt="Imagem 8" />
-    <img class="slide" src="imagem9.png" alt="Imagem 9" />
+  <!-- Tela inicial com botão play -->
+  <div id="startScreen">
+    <button id="startPlayBtn" aria-label="Iniciar música e abrir site"></button>
   </div>
 
-  <div class="texto-central">está vendo essa mocinha ai?
-é a garota na qual eu amo com forças que eu não sei nem de onde vem.</div>
+  <!-- Conteúdo principal escondido inicialmente -->
+  <div id="mainContent">
+
+    <!-- Botão play/pause -->
+    <button id="playPauseBtn" class="pause" aria-label="Pausar música"></button>
+
+    <!-- Música de fundo -->
+    <audio id="audioPlayer" loop>
+      <source src="nervous.mp3" type="audio/mpeg" />
+      Seu navegador não suporta o áudio.
+    </audio>
+
+    <!-- Slideshow -->
+    <div class="slideshow-container">
+      <img class="slide active" src="imagem1.jpg" alt="Imagem 1" />
+      <img class="slide" src="imagem2.png" alt="Imagem 2" />
+      <img class="slide" src="imagem3.png" alt="Imagem 3" />
+      <img class="slide" src="imagem4.png" alt="Imagem 4" />
+      <img class="slide" src="imagem5.png" alt="Imagem 5" />
+      <img class="slide" src="imagem6.png" alt="Imagem 6" />
+      <img class="slide" src="imagem7.png" alt="Imagem 7" />
+      <img class="slide" src="imagem8.png" alt="Imagem 8" />
+      <img class="slide" src="imagem9.png" alt="Imagem 9" />
+    </div>
+
+    <div class="texto-central">fefe : amoremio</div>
+  </div>
 
   <script>
-    // Slideshow com flip e fade
+    // Referências
+    const startScreen = document.getElementById("startScreen");
+    const startPlayBtn = document.getElementById("startPlayBtn");
+    const mainContent = document.getElementById("mainContent");
+    const audio = document.getElementById("audioPlayer");
+    const playPauseBtn = document.getElementById("playPauseBtn");
     const slides = document.querySelectorAll(".slide");
     let index = 0;
 
+    // Mostrar próximo slide
     function showNextSlide() {
       slides[index].classList.remove("active");
       index = (index + 1) % slides.length;
       slides[index].classList.add("active");
     }
-    setInterval(showNextSlide, 7000);
 
-    // Botão play/pause com ícone triangular
-    const audio = document.getElementById("audioPlayer");
-    const btn = document.getElementById("playPauseBtn");
+    // Quando clicar no play da tela inicial
+    startPlayBtn.addEventListener("click", () => {
+      // Esconde tela inicial
+      startScreen.style.display = "none";
+      // Mostra conteúdo principal
+      mainContent.style.display = "flex";
+      // Começa a tocar música
+      audio.play();
+      // Inicia slideshow
+      setInterval(showNextSlide, 7000);
+    });
 
-    btn.addEventListener("click", () => {
+    // Controle do botão play/pause do site
+    playPauseBtn.addEventListener("click", () => {
       if (audio.paused) {
         audio.play();
-        btn.classList.remove("play");
-        btn.classList.add("pause");
-        btn.setAttribute("aria-label", "Pausar música");
+        playPauseBtn.classList.remove("play");
+        playPauseBtn.classList.add("pause");
+        playPauseBtn.setAttribute("aria-label", "Pausar música");
       } else {
         audio.pause();
-        btn.classList.remove("pause");
-        btn.classList.add("play");
-        btn.setAttribute("aria-label", "Tocar música");
+        playPauseBtn.classList.remove("pause");
+        playPauseBtn.classList.add("play");
+        playPauseBtn.setAttribute("aria-label", "Tocar música");
       }
     });
   </script>
