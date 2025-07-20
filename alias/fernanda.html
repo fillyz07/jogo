@@ -5,65 +5,33 @@
   <style>
     body {
       background-color: black;
-      color: white;
+      color: black;
       font-family: Arial, sans-serif;
       text-align: center;
-      margin: 60px;
+      margin-top: 200px;
     }
 
-    #mensagem {
-      display: none;
-      white-space: pre-wrap;
-      font-size: 18px;
-      max-width: 800px;
-      margin: 0 auto;
+    a {
+      color: white;
+    }
     }
 
-    #botao {
-      padding: 15px 30px;
-      font-size: 18px;
-      background-color: white;
-      color: black;
-      border: none;
+    /* Falso link que não faz nada */
+    #jogo {
       cursor: pointer;
-      border-radius: 10px;
     }
 
-    #container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      flex-direction: column;
+    /* Link verdadeiro escondido no final da página */
+    #jogo2 {
+      margin-top: 200px; /* Força o usuário a rolar */
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <button id="botao" onclick="mostrarMensagem()">Clique aqui</button>
-    <div id="mensagem"></div>
-  </div>
-
-  <script>
-    const texto = `Oi Fernanda, Eu amo você pra sempre.
-
-    let i = 0;
-    const velocidade = 1;
-
-    function mostrarMensagem() {
-      document.getElementById("botao").style.display = "none";
-      const div = document.getElementById("mensagem");
-      div.style.display = "block";
-
-      function escrever() {
-        if (i < texto.length) {
-          div.innerHTML += texto.charAt(i);
-          i++;
-          setTimeout(escrever, velocidade);
-        }
-      }
-      escrever();
-    }
-  </script>
+  <h1>oi amor da minha vida</h1>
+  <h3>fiz isso aqui pra você</h3>
+  <!-- Link real escondido -->
+  <a id="jogo2" href="#" onclick="alert('agora sim você achou o link certo :))'); window.location.href='https://fillyz07.github.io/jogo/2'; return false;">clique</a>
 </body>
 </html>
