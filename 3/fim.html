@@ -12,74 +12,124 @@
       font-family: 'Arial', sans-serif;
       overflow-x: hidden;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
 
     .slideshow-container {
       position: relative;
-      width: 100%;
-      height: 100vh;
+      width: 700px;
+      height: 450px;
+      perspective: 1000px;
+      margin-bottom: 30px;
+      border-radius: 15px;
       overflow: hidden;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
     }
 
     .slide {
-      display: none;
-      width: 100%;
-      height: 100vh;
-      object-fit: cover;
       position: absolute;
+      width: 700px;
+      height: 450px;
+      object-fit: cover;
       top: 0;
       left: 0;
-      z-index: -1;
-      transition: opacity 2s ease-in-out;
+      opacity: 0;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      transition: opacity 1s ease;
+      transform-style: preserve-3d;
+      box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
     }
 
     .slide.active {
-      display: block;
-      z-index: 0;
+      opacity: 1;
+      animation: flipIn 1s forwards;
+      z-index: 2;
+    }
+
+    @keyframes flipIn {
+      0% {
+        transform: rotateY(90deg);
+      }
+      100% {
+        transform: rotateY(0deg);
+      }
     }
 
     .texto-central {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative;
       font-size: 2em;
       background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
+      padding: 15px 30px;
       border-radius: 20px;
-      z-index: 1;
+      z-index: 10;
+      max-width: 700px;
+      margin: 0 auto 40px;
     }
 
     audio {
       display: none;
     }
 
-    /* Botão fixo no topo direito */
+    /* Botão triangular de play/pause */
     #playPauseBtn {
       position: fixed;
       top: 15px;
       right: 15px;
+      width: 45px;
+      height: 45px;
       background-color: rgba(0, 31, 63, 0.8);
-      border: none;
-      color: white;
-      padding: 12px 18px;
-      font-size: 16px;
+      border-radius: 50%;
       cursor: pointer;
-      border-radius: 8px;
-      z-index: 1000;
-      user-select: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: background-color 0.3s ease;
+      z-index: 1000;
     }
-
     #playPauseBtn:hover {
       background-color: rgba(0, 31, 63, 1);
+    }
+
+    /* Triângulo play */
+    #playPauseBtn.play::before {
+      content: "";
+      display: block;
+      margin-left: 3px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 15px 0 15px 25px;
+      border-color: transparent transparent transparent white;
+    }
+
+    /* Dois traços pause */
+    #playPauseBtn.pause::before,
+    #playPauseBtn.pause::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 25px;
+      background: white;
+      border-radius: 2px;
+    }
+    #playPauseBtn.pause::before {
+      left: 14px;
+    }
+    #playPauseBtn.pause::after {
+      left: 27px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Botão de Play / Pause -->
-  <button id="playPauseBtn">Pause</button>
+  <!-- Botão play/pause -->
+  <button id="playPauseBtn" class="pause" aria-label="Pausar música"></button>
 
   <!-- Música de fundo -->
   <audio id="audioPlayer" autoplay loop>
@@ -98,12 +148,12 @@
     <img class="slide" src="imagem7.png" alt="Imagem 7" />
     <img class="slide" src="imagem8.png" alt="Imagem 8" />
     <img class="slide" src="imagem9.png" alt="Imagem 9" />
-
-    <div class="texto-central">fefe : amoremio</div>
   </div>
 
+  <div class="texto-central">fefe : amoremio</div>
+
   <script>
-    // Controle do slideshow
+    // Slideshow com flip e fade
     const slides = document.querySelectorAll(".slide");
     let index = 0;
 
@@ -112,19 +162,23 @@
       index = (index + 1) % slides.length;
       slides[index].classList.add("active");
     }
-    setInterval(showNextSlide, 7000); // muda a cada 7 segundos
+    setInterval(showNextSlide, 7000);
 
-    // Controle do áudio com botão
-    const audioPlayer = document.getElementById("audioPlayer");
-    const playPauseBtn = document.getElementById("playPauseBtn");
+    // Botão play/pause com ícone triangular
+    const audio = document.getElementById("audioPlayer");
+    const btn = document.getElementById("playPauseBtn");
 
-    playPauseBtn.addEventListener("click", () => {
-      if (audioPlayer.paused) {
-        audioPlayer.play();
-        playPauseBtn.textContent = "Pause";
+    btn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        btn.classList.remove("play");
+        btn.classList.add("pause");
+        btn.setAttribute("aria-label", "Pausar música");
       } else {
-        audioPlayer.pause();
-        playPauseBtn.textContent = "Play";
+        audio.pause();
+        btn.classList.remove("pause");
+        btn.classList.add("play");
+        btn.setAttribute("aria-label", "Tocar música");
       }
     });
   </script>
