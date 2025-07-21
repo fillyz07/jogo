@@ -2,29 +2,37 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>enigma</title>
+  <title>Página Preta com Imagem e Texto</title>
   <style>
     body, html {
       margin: 0; padding: 0;
       width: 100%; height: 100%;
       background-color: black;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      color: #ccc; /* cor clara para o texto */
+      font-family: Arial, sans-serif;
     }
     img {
       max-width: 90%;
-      max-height: 90%;
+      max-height: 80%;
       object-fit: contain;
       border-radius: 10px; /* opcional */
       box-shadow: 0 0 20px rgba(255,255,255,0.2); /* opcional */
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.2em;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <img src="image.png" alt="Foto Centralizada" />
-<h4> segredinho nosso em</h4>
-  <h1> lov u fefe</h1>
-<h1> <3 </h1>
+  <p>segredinho nosso em</p>
+<p> lov u fefe</p>
+  <p><3</p>
 </body>
 </html>
