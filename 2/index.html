@@ -4,21 +4,33 @@
   <title>enigma</title>
   <style>
     body {
-      background-color: blue;
+      background-color:blue;
       color: white;
       font-family: Arial, sans-serif;
-      margin-top: 300px;
+      text-align: center;
+      margin-top: 200px;
     }
 
     a {
       color: white;
     }
     }
+
+    /* Falso link que não faz nada */
+    #jogo {
+      cursor: pointer;
+    }
+
+    /* Link verdadeiro escondido no final da página */
+    #jogo2 {
+      margin-top: 200px; /* Força o usuário a rolar */
+      display: block;
+    }
   </style>
 </head>
 <body>
-  <a>amo você, sabia?</a>
- <h2 class="oculto">aperta tab :)</h2>
-<h1> aqui <a href="https://fillyz07.github.io/jogo/3"; return false;"> </a> </h1>
+<h1> eu amo você fefe.</h1>
+  <!-- Link real escondido -->
+  <a id="jogo2" href="https://fillyz07.github.io/jogo/3" return false;">clique</a>
 </body>
 </html>
